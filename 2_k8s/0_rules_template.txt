@@ -1,0 +1,7 @@
+  - host: JUPYTER_USER.CLUSTER_DOMAIN
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: JUPYTER_USER
+          servicePort: 8888

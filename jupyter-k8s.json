@@ -1,0 +1,42 @@
+{
+    "name": "jupyter",
+    "cluster_type": "ManagedKubernetes",
+    "disable_rollback": true,
+    "timeout_mins": 60,
+    "kubernetes_version": "1.12.6-aliyun.1",
+    "region_id": "ap-northeast-1",
+    "snat_entry": true,
+    "cloud_monitor_flags": true,
+    "public_slb": true,
+    "node_cidr_mask": "25",
+    "proxy_mode": "ipvs",
+    "tags": [],
+    "addons": [
+        {
+            "name": "terway"
+        },
+        {
+            "name": "aliyun-log-controller"
+        },
+        {
+            "name": "nginx-ingress-controller",
+            "config": "{\"IngressSlbNetworkType\":\"internet\"}"
+        }
+    ],
+    "worker_instance_types": [
+        "ecs.c5.xlarge"
+    ],
+    "num_of_nodes": 4,
+    "worker_system_disk_category": "cloud_efficiency",
+    "worker_system_disk_size": 120,
+    "worker_data_disk": true,
+    "worker_instance_charge_type": "PostPaid",
+    "vpcid": "*********",
+    "container_cidr": "172.20.0.0/16",
+    "service_cidr": "172.21.0.0/20",
+    "vswitch_ids": [
+        "*********",
+        "*********"
+    ],
+    "login_password": "*********"
+}

@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: JUPYTER_USER
+  labels:
+    app: JUPYTER_USER
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: JUPYTER_USER
+  template:
+    metadata:
+      labels:
+        app: JUPYTER_USER
+    spec:
+      initContainers:
+      - name: busybox
+        image: busybox
+        command:
+        - wget
+        - "https://joe-public.oss-ap-northeast-1.aliyuncs.com/code.zip"
+        - "-O"
+        - "/home/jovyan/work/code.zip"
+        volumeMounts:
+          - name: jupyter-work
+            mountPath: "/home/jovyan/work"
+      containers:
+      - name: minimal-notebook
+        image: jupyter/minimal-notebook:latest
+        ports:
+        - containerPort: 8888
+        command: ["start-notebook.sh"]
+        volumeMounts:
+          - name: nas
+            mountPath: "/home/jovyan/shared-data"
+          - name: jupyter-work
+            mountPath: "/home/jovyan/work"
+      volumes:
+      - name: "nas"
+        persistentVolumeClaim:
+          claimName: pvc-nas
+      - name: "jupyter-work"
+        emptyDir: {}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: JUPYTER_USER
+spec:
+  type: NodePort
+  selector:
+    app: JUPYTER_USER
+  ports:
+  - protocol: TCP
+    port: 8888
+    targetPort: 8888

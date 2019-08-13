@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-nas
+  labels:
+    alicloud-pvname: pv-nas
+spec:
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteMany # ReadWriteOnce / ReadWriteMany <- NASの場合、ReadOnlyManyを対応していない
+  flexVolume:
+    driver: "alicloud/nas"
+    options:
+      server: "********.ap-northeast-1.nas.aliyuncs.com"   # NASのエンドポイント
+      path: "/shared-data" # TODO bug(?) 指定したsubpathがない場合、自動的に作成されいない
+      vers: "3"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-nas
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+  selector:
+    matchLabels:
+      alicloud-pvname: pv-nas
