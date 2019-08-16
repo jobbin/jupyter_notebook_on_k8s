@@ -19,7 +19,7 @@ spec:
         image: busybox
         command:
         - wget
-        - "https://joe-public.oss-ap-northeast-1.aliyuncs.com/code.zip"
+        - "< code.zip url >"
         - "-O"
         - "/home/jovyan/work/code.zip"
         volumeMounts:
@@ -27,7 +27,7 @@ spec:
             mountPath: "/home/jovyan/work"
       containers:
       - name: minimal-notebook
-        image: jupyter/minimal-notebook:latest
+        image: jooooe/aliyun_jupyter_minimal
         ports:
         - containerPort: 8888
         command: ["start-notebook.sh"]

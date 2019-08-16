@@ -1,0 +1,3 @@
+/by_terraform/terraform.tfsta*
+/by_terraform/.terraform/*
+/by_python_sdk/2_k8s/.ingress.yaml

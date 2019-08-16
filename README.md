@@ -40,7 +40,7 @@ kubectl apply -f 1_jupyter-nas.yaml -n jupyter
 
 domain="*******.ap-northeast-1.alicontainer.com"
 
-./kubectl_apply.sh <The num of user> ${domain}
+./2_kubectl_apply.sh <The num of user> ${domain}
 
 ``` 
 

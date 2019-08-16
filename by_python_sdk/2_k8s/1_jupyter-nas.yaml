@@ -9,10 +9,11 @@ spec:
     storage: 20Gi
   accessModes:
     - ReadWriteMany # ReadWriteOnce / ReadWriteMany <- NASの場合、ReadOnlyManyを対応していない
+  persistentVolumeReclaimPolicy: Delete # TODO Deleteが効かない 
   flexVolume:
     driver: "alicloud/nas"
     options:
-      server: "********.ap-northeast-1.nas.aliyuncs.com"   # NASのエンドポイント
+      server: "****"   # NASのエンドポイント
       path: "/shared-data" # TODO bug(?) 指定したsubpathがない場合、自動的に作成されいない
       vers: "3"
 ---

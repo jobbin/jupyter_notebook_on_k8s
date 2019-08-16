@@ -403,7 +403,7 @@ import base64
 USER_DATA= '''#!/bin/bash
 sudo yum update -y
 sudo yum -y install nfs-utils
-sudo mount -t nfs -o vers=3,nolock,proto=tcp 25543b48e13-jdd22.ap-northeast-1.nas.aliyuncs.com:/ /mnt
+sudo mount -t nfs -o vers=3,nolock,proto=tcp <nas endpoint>:/ /mnt
 mkdir /mnt/shared-data
 '''
 
